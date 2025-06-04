@@ -5,6 +5,8 @@ const state = {
   dogImg: null,
   addDogButton: null,
   dogImageContainer: null,
+  dogCountLabel: null,
+  dogCount: 1,
 };
 
 const pickRandomNumber = () => {
@@ -17,7 +19,7 @@ const setRandomDog = () => {
   state.dogImg.src = newImgName;
 };
 
-const addNewDog = (event) => {
+const handleAddButtonClicked = (event) => {
   // Pick a random rumber
   // set the path for the new dogImg
   // Create a img element
@@ -29,9 +31,12 @@ const addNewDog = (event) => {
   newDog.src = newImgName;
   newDog.alt = `Random dog number ${imgNumber}`;
   state.dogImageContainer.prepend(newDog);
-}
+  ++state.dogCount;
+  state.dogCountLabel.textContent = state.dogCount;
+};
+
 const registerEvents = () => {
-  state.addDogButton.addEventListener('click', addNewDog);
+  state.addDogButton.addEventListener('click', handleAddButtonClicked);
 };
 
 const onLoaded = () => {
@@ -44,6 +49,7 @@ const loadControls = () => {
   state.dogImg = document.getElementById('dog-image');
   state.addDogButton = document.getElementById('addDogButton');
   state.dogImageContainer = document.getElementById('dog-img-container');
+  state.dogCountLabel = document.getElementById('dogCountLabel');
 };
 
 onLoaded();
